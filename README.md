@@ -12,7 +12,7 @@ npm install (or npm i)
 2. Android Build
 
 ```
-npm run anroid
+npm run android
 ```
 
 3. Ios Build
