@@ -1,6 +1,3 @@
-# Trip-In-World-App
-
-
 ## How to run in local environment
 
 1. node module install
@@ -15,7 +12,7 @@ npm install (or npm i)
 npm run android
 ```
 
-3. Ios Build
+3. iOS Build
 
 ```
 npm run ios
