@@ -1,12 +1,12 @@
 ## How to run in local environment
 
-1. node module install
+### 1. node module install
 
 ```
 npm install (or npm i)
 ```
 
-2. Android Build
+### 2. Android Build
 
 ```
 (macOS)
@@ -16,7 +16,7 @@ chmod +x gradlew
 npm run android
 ```
 
-3. iOS Build
+### 3. iOS Build
 
 ```
 cd ios
