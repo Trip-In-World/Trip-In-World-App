@@ -19,6 +19,9 @@ npm run android
 3. iOS Build
 
 ```
+cd ios
+pod install
+cd ..
 npm run ios
 ```
 
