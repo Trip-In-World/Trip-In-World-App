@@ -27,14 +27,14 @@ npm run ios
 
 ## Run Prettier, Eslint
 ### Prettier
-check prettier format
+1. check prettier format
 
-    ```bash
+    ```
     npm run format
     ```
 
-fix prettier format
+2. fix prettier format
 
-    ```bash
+    ```
     npm run format:fix
     ```
