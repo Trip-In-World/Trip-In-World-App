@@ -27,19 +27,14 @@ npm run ios
 
 ## Run Prettier, Eslint
 ### Prettier
-```
-# prettier format check
-npm run format
+check prettier format
 
-# format fix
-npx prettier --write ./src
-```
+    ```bash
+    npm run format
+    ```
 
-### Eslint
-```
-# lint check
-npm run lint
+fix prettier format
 
-# lint fix
-npx eslint ./src/**/*.tsx --fix
-```
+    ```bash
+    npm run format:fix
+    ```
