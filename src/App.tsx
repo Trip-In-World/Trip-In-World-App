@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, View } from 'react-native';
-import { store } from './common/store/configureStore';
+import { store } from './store/configureStore';
 import { Provider } from 'react-redux';
 
 function App() {
