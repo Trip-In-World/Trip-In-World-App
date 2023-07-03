@@ -65,3 +65,6 @@ buck-out/
 /ios/Pods/
 ios/Podfile.lock
 ios/wagle.xcworkspace/
+
+.env
+.env.*
