@@ -1,6 +1,6 @@
 import axios from 'axios';
 import Config from 'react-native-config';
-import { errorMessage } from '../staus';
+import { errorMessage } from '../status/message/error-message';
 import { Platform } from 'react-native';
 import EncryptedStorage from 'react-native-encrypted-storage';
 
