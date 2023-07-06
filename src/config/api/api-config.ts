@@ -41,12 +41,12 @@ class ApiConfig {
             (response) => {
                 return response;
             },
-            (error) => {
+            async (error) => {
                 const { response } = error;
         
                 // accessToken, refreshToken이 만료된 경우 or 로그인을 하지 않은 경우
                 if (response.status === 401) {
-                    validateToken.requestTokenApi(response.data.message);
+                    await validateToken.requestTokenApi(response.data.message);
                     return response;
                 }
 

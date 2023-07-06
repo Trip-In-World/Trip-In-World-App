@@ -25,9 +25,11 @@
     "src"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "babel.config.js",
+    "metro.config.js",
   ],
-  "baseUrl": "./src",
+  "baseUrl": "./",
   "paths": {
     "@/*": ["src/*"],
   }
