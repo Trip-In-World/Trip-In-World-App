@@ -1,10 +1,10 @@
 import axios from 'axios';
 import Config from 'react-native-config';
-import { errorMessage } from '../staus/message';
+import { errorMessage } from '../staus';
 import { Platform } from 'react-native';
 import EncryptedStorage from 'react-native-encrypted-storage';
 
-export default class ValidateToken {
+class ValidateToken {
     private readonly requestUrl;
 
     constructor() {
@@ -45,10 +45,11 @@ export default class ValidateToken {
             : Config.ANDROID_REQUEST_URL;
 
         if (!baseUrl) {
-            // TODO: 오류 처리
-            throw 'error';
+            throw errorMessage.NO_ENV_FILE;
         }
 
         return baseUrl;
     }
 }
+
+export default new ValidateToken();

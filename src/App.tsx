@@ -1,11 +1,9 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Text, View } from 'react-native';
 import { store } from './stores/configureStore';
 import { Provider } from 'react-redux';
 
-export function App() {
-  useEffect();
-  
+export function App() {  
   return (
     <Provider store={store}>
       <View>

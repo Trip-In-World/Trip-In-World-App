@@ -1,14 +1,15 @@
-import axios, { AxiosInstance, AxiosStatic } from 'axios';
+import axios, { AxiosInstance } from 'axios';
 import Config from 'react-native-config';
 import EncryptedStorage from 'react-native-encrypted-storage';
 import { Platform } from 'react-native';
-import ValidateToken from './validate-token';
+import validateToken from './validate-token';
+import { errorMessage } from '../staus';
 
-export default class ApiConfig {
-    readonly requestTo: AxiosInstance;
+class ApiConfig {
+    public readonly requestTo: AxiosInstance;
     private readonly requestUrl: string;
     
-    constructor(private validateToken: ValidateToken) {
+    constructor() {
         this.requestUrl = this.getRequestUrl();
         this.requestTo = this.getRequestTo();
     }
@@ -45,13 +46,11 @@ export default class ApiConfig {
         
                 // accessToken, refreshToken이 만료된 경우 or 로그인을 하지 않은 경우
                 if (response.status === 401) {
-                    this.validateToken.requestTokenApi(response.data.message);
+                    validateToken.requestTokenApi(response.data.message);
+                    return response;
                 }
-        
-                // token이 존재하나 권한이 없는 경우
-                if (response.status === 403) {
 
-                }
+                return Promise.reject(error);
             }
         )
 
@@ -64,10 +63,11 @@ export default class ApiConfig {
             : Config.ANDROID_REQUEST_URL;
 
         if (!baseUrl) {
-            // TODO: 오류 처리
-            throw 'error';
+            throw errorMessage.NO_ENV_FILE;
         }
 
         return baseUrl;
     }
 }
+
+export default new ApiConfig();
