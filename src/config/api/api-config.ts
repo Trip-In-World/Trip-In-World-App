@@ -5,8 +5,8 @@ import { Platform } from 'react-native';
 import ValidateToken from './validate-token';
 
 export default class ApiConfig {
-    readonly requestUrl: string;
     readonly requestTo: AxiosInstance;
+    private readonly requestUrl: string;
     
     constructor(private validateToken: ValidateToken) {
         this.requestUrl = this.getRequestUrl();
@@ -60,11 +60,12 @@ export default class ApiConfig {
 
     private getRequestUrl = () => {
         const baseUrl = Platform.OS === 'ios'
-            ? process.env.IOS_REQUEST_URL 
+            ? Config.IOS_REQUEST_URL 
             : Config.ANDROID_REQUEST_URL;
 
         if (!baseUrl) {
-            throw 'NOT ENV FILE';
+            // TODO: 오류 처리
+            throw 'error';
         }
 
         return baseUrl;
