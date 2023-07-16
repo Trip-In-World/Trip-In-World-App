@@ -1,14 +1,17 @@
 apply plugin: "com.android.application"
 apply plugin: "com.facebook.react"
 
-// 빌드 타입마다 .env가 바뀌어야 하는 경우 아래코드 설정 (.env 하나인 경우 무관)
+// 빌드 타입마다 .env가 바뀌어야 하는 경우
 project.ext.envConfigFiles = [
+    // 운영 환경
     productiondebug: ".env.production",
     productionrelease: ".env.production",
-    developmentrelease: ".env.development",
+    // 개발 환경
     developmentdebug: ".env.development",
-    stagingrelease: ".env.staging",
+    developmentrelease: ".env.development",
+    // 테스트 서버 환경
     stagingdebug: ".env.staging"
+    stagingrelease: ".env.staging",
 ]
 
 apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
@@ -146,9 +149,7 @@ android {
     flavorDimensions "default"
     productFlavors {
         production {}
-        staging {
-        // 여기서 빌드별 구성을 할 수 있습니다.
-        }
+        staging {}
         development {}
     }
 
