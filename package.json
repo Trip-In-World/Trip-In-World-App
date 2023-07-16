@@ -20,6 +20,7 @@
     "android:prod-release": "react-native run-android --variant=productionrelease"
   },
   "dependencies": {
+    "@react-navigation/native": "^6.1.7",
     "@reduxjs/toolkit": "^1.9.5",
     "axios": "^1.4.0",
     "babel-plugin-module-resolver": "^5.0.0",
