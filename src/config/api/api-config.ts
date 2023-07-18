@@ -23,10 +23,10 @@ class ApiConfig {
         instance.interceptors.request.use(
             async (config) => {
                 // TODO: redux 사용 변경
-                const accessToken = await EncryptedStorage.getItem('accessToken');
-        
-                if (accessToken) {
-                    config.headers['Authorization'] = `Bearer ${accessToken}`;
+                const token = await this.getToken(config.url);
+
+                if (token) {
+                    config.headers['Authorization'] = `Bearer ${token}`;
                 }
         
                 return config;
@@ -34,37 +34,41 @@ class ApiConfig {
             (error) => {
                 return Promise.reject(error);
             }
-        )
+        );
         
         instance.interceptors.response.use(
             (response) => {
                 return response;
             },
             async (error) => {
-                const { response } = error;
+                const { config, response } = error;
 
                 // accessToken, refreshToken이 만료된 경우 or 로그인을 하지 않은 경우
                 if (response.status === 401) {
                     await this.requestTokenApi(response.data.message);
-                    return response;
+
+                    const accessToken = await EncryptedStorage.getItem('access-token');
+                    config.headers['Authorization'] = `Bearer ${accessToken}`;
+
+                    return axios(config);
                 }
 
                 return Promise.reject(error);
             }
-        )
+        );
 
         return instance;
     }
 
-    public requestTokenApi = async (message: string) => {
+    private requestTokenApi = async (message: string) => {
         switch (message) {
             case errorMessage.ACCESS_TOKEN_INVALID:
-                const accessToken = await this.getAccessToken();
+                const { accessToken } = (await axios.post(`${this.requestUrl}/user/access-token`)).data;
                 await EncryptedStorage.setItem('accessToken', accessToken);
                 break;
 
             case errorMessage.REFRESH_TOKEN_INVALID:
-                const refreshToken = await this.getRefreshToken();
+                const { refreshToken } = (await axios.post(`${this.requestUrl}/user/refresh-token`)).data;
                 await EncryptedStorage.setItem('refreshToken', refreshToken);
                 break;
 
@@ -72,16 +76,6 @@ class ApiConfig {
                 // TODO: 로그인 페이지로 전환
                 break;
         }
-    }
-
-    private getAccessToken = async () => {
-        const { accessToken } = (await axios.post(`${this.requestUrl}/user/access-token`)).data;
-        return accessToken;
-    }
-
-    private getRefreshToken = async () => {
-        const { refreshToken } = (await axios.post(`${this.requestUrl}/user/refresh-token`)).data;
-        return refreshToken;
     }
 
     private getRequestUrl = () => {
@@ -94,6 +88,14 @@ class ApiConfig {
         }
 
         return baseUrl;
+    }
+
+    private getToken = async (url: string | undefined) => {
+        if (url === '/user/refresh-token') {
+            return await EncryptedStorage.getItem('refresh-token');
+        }
+        
+        return await EncryptedStorage.getItem('access-token');
     }
 }
 
