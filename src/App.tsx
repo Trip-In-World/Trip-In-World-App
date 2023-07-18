@@ -1,14 +1,12 @@
 import React from 'react';
-import { Text, View } from 'react-native';
 import { store } from './stores/configureStore';
 import { Provider } from 'react-redux';
+import Navigation from './navigation';
 
 export function App() {  
   return (
     <Provider store={store}>
-      <View>
-        <Text>안녕하세요!</Text>
-      </View>
+      <Navigation/>
     </Provider>
   );
 }

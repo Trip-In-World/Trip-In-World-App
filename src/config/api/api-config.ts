@@ -2,7 +2,6 @@ import axios, { AxiosInstance } from 'axios';
 import Config from 'react-native-config';
 import EncryptedStorage from 'react-native-encrypted-storage';
 import { Platform } from 'react-native';
-import validateToken from './validate-token';
 import { errorMessage } from '../status/message/error-message';
 
 class ApiConfig {
@@ -46,7 +45,7 @@ class ApiConfig {
 
                 // accessToken, refreshToken이 만료된 경우 or 로그인을 하지 않은 경우
                 if (response.status === 401) {
-                    await validateToken.requestTokenApi(response.data.message);
+                    await this.requestTokenApi(response.data.message);
                     return response;
                 }
 
@@ -55,6 +54,34 @@ class ApiConfig {
         )
 
         return instance;
+    }
+
+    public requestTokenApi = async (message: string) => {
+        switch (message) {
+            case errorMessage.ACCESS_TOKEN_INVALID:
+                const accessToken = await this.getAccessToken();
+                await EncryptedStorage.setItem('accessToken', accessToken);
+                break;
+
+            case errorMessage.REFRESH_TOKEN_INVALID:
+                const refreshToken = await this.getRefreshToken();
+                await EncryptedStorage.setItem('refreshToken', refreshToken);
+                break;
+
+            case errorMessage.NO_SIGN_IN:
+                // TODO: 로그인 페이지로 전환
+                break;
+        }
+    }
+
+    private getAccessToken = async () => {
+        const { accessToken } = (await axios.post(`${this.requestUrl}/user/access-token`)).data;
+        return accessToken;
+    }
+
+    private getRefreshToken = async () => {
+        const { refreshToken } = (await axios.post(`${this.requestUrl}/user/refresh-token`)).data;
+        return refreshToken;
     }
 
     private getRequestUrl = () => {
