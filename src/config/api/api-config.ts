@@ -23,7 +23,7 @@ class ApiConfig {
         instance.interceptors.request.use(
             async (config) => {
                 // TODO: redux 사용 변경
-                const token = await this.getToken(config.url);
+                const token = await this.getTokenByRequestUrl(config.url);
 
                 if (token) {
                     config.headers['Authorization'] = `Bearer ${token}`;
@@ -61,14 +61,22 @@ class ApiConfig {
     }
 
     private requestTokenApi = async (message: string) => {
+        const refreshTokenForRenew = await await EncryptedStorage.getItem('refresh-token');
+
         switch (message) {
             case errorMessage.ACCESS_TOKEN_INVALID:
-                const { accessToken } = (await axios.post(`${this.requestUrl}/user/access-token`)).data;
+                const { accessToken } = (await axios.post(`${this.requestUrl}/user/access-token`, {
+                    Authorization: `Bearer ${refreshTokenForRenew}`
+                })).data;
+
                 await EncryptedStorage.setItem('accessToken', accessToken);
                 break;
 
             case errorMessage.REFRESH_TOKEN_INVALID:
-                const { refreshToken } = (await axios.post(`${this.requestUrl}/user/refresh-token`)).data;
+                const { refreshToken } = (await axios.post(`${this.requestUrl}/user/refresh-token`, {
+                    Authorization: `Bearer ${refreshTokenForRenew}`
+                })).data;
+                
                 await EncryptedStorage.setItem('refreshToken', refreshToken);
                 break;
 
@@ -90,7 +98,7 @@ class ApiConfig {
         return baseUrl;
     }
 
-    private getToken = async (url: string | undefined) => {
+    private getTokenByRequestUrl = async (url: string | undefined) => {
         if (url === '/user/refresh-token') {
             return await EncryptedStorage.getItem('refresh-token');
         }
