@@ -68,3 +68,6 @@ ios/wagle.xcworkspace/
 
 .env
 .env.*
+
+#react-native-config
+ios/Config.xcconfig
