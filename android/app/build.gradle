@@ -147,7 +147,6 @@ android {
     // 해당 위치에서 빌드별 구성을 할 수 있다.
     productFlavors {
         production {}
-        staging {}
         development {}
     }
 
