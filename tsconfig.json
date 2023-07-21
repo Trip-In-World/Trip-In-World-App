@@ -28,9 +28,10 @@
     "node_modules",
     "babel.config.js",
     "metro.config.js",
+    "jest.config.js",
   ],
-  "baseUrl": "./",
+  "baseUrl": ".",
   "paths": {
-    "@/*": ["src/*"],
+    "@/*": ["./src/*"],
   }
 }
