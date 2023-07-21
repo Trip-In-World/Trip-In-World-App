@@ -70,4 +70,5 @@ ios/wagle.xcworkspace/
 .env.*
 
 #react-native-config
+ios/tmp.xcconfig
 ios/Config.xcconfig

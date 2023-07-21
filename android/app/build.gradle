@@ -9,9 +9,6 @@ project.ext.envConfigFiles = [
     // 개발 환경
     developmentdebug: ".env.development",
     developmentrelease: ".env.development",
-    // 테스트 서버 환경
-    stagingdebug: ".env.staging"
-    stagingrelease: ".env.staging",
 ]
 
 apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
@@ -147,6 +144,7 @@ android {
         }
     }
     flavorDimensions "default"
+    // 해당 위치에서 빌드별 구성을 할 수 있다.
     productFlavors {
         production {}
         staging {}
