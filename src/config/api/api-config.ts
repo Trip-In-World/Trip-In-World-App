@@ -2,7 +2,7 @@ import axios, { AxiosInstance } from 'axios';
 import Config from 'react-native-config';
 import EncryptedStorage from 'react-native-encrypted-storage';
 import { Platform } from 'react-native';
-import { errorMessage } from '@config/status/message/error-message';
+import { errorMessage } from '../status/message/error-message';
 
 class ApiConfig {
     public readonly requestTo: AxiosInstance;
