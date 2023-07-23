@@ -61,7 +61,7 @@ class ApiConfig {
     }
 
     private requestTokenApi = async (message: string) => {
-        const refreshTokenForRenew = await await EncryptedStorage.getItem('refresh-token');
+        const refreshTokenForRenew = await EncryptedStorage.getItem('refresh-token');
 
         switch (message) {
             case errorMessage.ACCESS_TOKEN_INVALID:
@@ -92,6 +92,7 @@ class ApiConfig {
             : Config.ANDROID_REQUEST_URL;
 
         if (!baseUrl) {
+            // TODO: errorPage 전환 후 오류 로그 기록하기
             throw errorMessage.NO_ENV_FILE;
         }
 
