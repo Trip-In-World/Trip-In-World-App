@@ -13,7 +13,7 @@ npm install (or npm i)
 cd android
 chmod +x gradlew 
 
-npm run android
+npm run android:dev
 ```
 
 ### 3. iOS Build
@@ -22,7 +22,7 @@ npm run android
 cd ios
 pod install
 cd ..
-npm run ios
+npm run ios:dev
 ```
 
 ## Run Prettier, Eslint

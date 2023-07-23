@@ -65,3 +65,13 @@ buck-out/
 /ios/Pods/
 ios/Podfile.lock
 ios/wagle.xcworkspace/
+
+.env
+.env.*
+
+#react-native-config
+ios/tmp.xcconfig
+ios/Config.xcconfig
+
+# schema
+xcschemes/

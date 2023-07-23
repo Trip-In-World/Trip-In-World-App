@@ -1,6 +1,18 @@
 apply plugin: "com.android.application"
 apply plugin: "com.facebook.react"
 
+// 빌드 타입마다 .env가 바뀌어야 하는 경우
+project.ext.envConfigFiles = [
+    // 운영 환경
+    productiondebug: ".env.production",
+    productionrelease: ".env.production",
+    // 개발 환경
+    developmentdebug: ".env.development",
+    developmentrelease: ".env.development",
+]
+
+apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
+
 import com.android.build.OutputFile
 
 /**
@@ -121,6 +133,7 @@ android {
     buildTypes {
         debug {
             signingConfig signingConfigs.debug
+            matchingFallbacks = ['debug', 'release']
         }
         release {
             // Caution! In production, you need to generate your own keystore file.
@@ -129,6 +142,12 @@ android {
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
+    }
+    flavorDimensions "default"
+    // 해당 위치에서 빌드별 구성을 할 수 있다.
+    productFlavors {
+        production {}
+        development {}
     }
 
     // applicationVariants are e.g. debug, release

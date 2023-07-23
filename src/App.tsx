@@ -1,16 +1,14 @@
 import React from 'react';
-import { Text, View } from 'react-native';
-import { store } from './store/configureStore';
+import { store } from './stores/configureStore';
 import { Provider } from 'react-redux';
+import Navigation from './navigation';
 
-export function App() {
+export function App() {  
   return (
     <Provider store={store}>
-      <View>
-        <Text>안녕하세요!</Text>
-      </View>
+      <Navigation/>
     </Provider>
   );
 }
 
-export { default } from '../.storybook';
+export default App;
