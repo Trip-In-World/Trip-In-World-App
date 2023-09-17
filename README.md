@@ -31,26 +31,26 @@ npm run ios:dev
 
 1. check prettier format
 
-    ```
-    npm run format
-    ```
+   ```
+   npm run format
+   ```
 
 2. fix prettier format
 
-    ```
-    npm run format:fix
-    ```
+   ```
+   npm run format:fix
+   ```
 
 ### ESlint
 
 1. check eslint
 
-    ```
-    npm run lint
-    ```
+   ```
+   npm run lint
+   ```
 
 2. fix eslint
 
-    ```
-    npm run lint:fix
-    ```
+   ```
+   npm run lint:fix
+   ```

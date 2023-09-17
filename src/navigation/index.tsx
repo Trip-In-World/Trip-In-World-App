@@ -3,13 +3,13 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import ChatScreen from '../screens/chat';
 
 export default function Navigation() {
-    const Stack = createNativeStackNavigator();
+	const Stack = createNativeStackNavigator();
 
-    return (
-        <NavigationContainer>
-            <Stack.Navigator>
-                <Stack.Screen name='Chat' component={ChatScreen} options={{ headerShown: false }} />
-            </Stack.Navigator>
-        </NavigationContainer>
-    );
+	return (
+		<NavigationContainer>
+			<Stack.Navigator>
+				<Stack.Screen name='Chat' component={ChatScreen} options={{ headerShown: false }} />
+			</Stack.Navigator>
+		</NavigationContainer>
+	);
 }
