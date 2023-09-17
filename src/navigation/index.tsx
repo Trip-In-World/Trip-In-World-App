@@ -8,8 +8,8 @@ export default function Navigation() {
     return (
         <NavigationContainer>
             <Stack.Navigator>
-                <Stack.Screen name='Chat' component={ChatScreen} options={{ headerShown: false }}/>
+                <Stack.Screen name='Chat' component={ChatScreen} options={{ headerShown: false }} />
             </Stack.Navigator>
         </NavigationContainer>
-    )
+    );
 }

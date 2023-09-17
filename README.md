@@ -11,7 +11,7 @@ npm install (or npm i)
 ```
 (macOS)
 cd android
-chmod +x gradlew 
+chmod +x gradlew
 
 npm run android:dev
 ```
@@ -26,7 +26,9 @@ npm run ios:dev
 ```
 
 ## Run Prettier, Eslint
+
 ### Prettier
+
 1. check prettier format
 
     ```
@@ -38,7 +40,9 @@ npm run ios:dev
     ```
     npm run format:fix
     ```
+
 ### ESlint
+
 1. check eslint
 
     ```

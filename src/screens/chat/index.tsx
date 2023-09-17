@@ -5,5 +5,5 @@ export default function ChatScreen() {
         <View>
             <Text>hello world!</Text>
         </View>
-    )
+    );
 }
