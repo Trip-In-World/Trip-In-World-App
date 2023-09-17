@@ -1,12 +1,10 @@
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 
-const rootReducer = combineReducers({
-
-});
+const rootReducer = combineReducers({});
 
 export const store = configureStore({
-  reducer: rootReducer,
+	reducer: rootReducer,
 });
 
 export type RootState = ReturnType<typeof store.getState>;
